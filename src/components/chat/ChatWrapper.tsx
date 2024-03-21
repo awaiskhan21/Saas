@@ -22,9 +22,7 @@ const ChatWrapper = ({ fileId, isSubscribed }: ChatWrapperProps) => {
     {
       queryKey: ["getFileUploadStatus", { fileId }],
       refetchInterval: (data) =>
-        data.state.status === "success" || data.state.status === "error"
-          ? false
-          : 500,
+        data?.status === "SUCCESS" || data?.status === "FAILED" ? false : 500,
     }
   );
 

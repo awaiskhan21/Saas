@@ -22,12 +22,11 @@ const Messages = ({ fileId }: MessagesProps) => {
       },
       {
         queryKey: ["getFileMessages", { fileId }],
-        initialPageParam: { fileId },
         getNextPageParam: (lastPage) => lastPage?.nextCursor,
       }
     );
 
-  const messages = data?.messages;
+  const messages = data?.pages.flatMap((page) => page.messages);
 
   const loadingMessage = {
     createdAt: new Date().toISOString(),
